@@ -116,5 +116,5 @@ grunt build
 ```
 
 ## License
-The MIT License. Full License is [here](https://github.com/datastructures-js/queue/blob/master/LICENSE)
+The MIT License. Full License is [here](https://github.com/eyas-ranjous/intervals-composite/blob/master/LICENSE)
 
