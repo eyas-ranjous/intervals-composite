@@ -1,2 +1,2 @@
 # intervals-composite
-enables working with multiple intervals in a project and clearing them through one call.
+Having multiple intervals started in a node project can complicate the code especially in the shutdown process where intervals need to be cleared. This package solves the problem by building a composite object that manages all intervals and provide an interface to work with them individually or as group.
