@@ -1,0 +1,5 @@
+.git*
+*.test.js
+.travis.yml
+Gruntfile.js
+coverage/
