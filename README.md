@@ -61,7 +61,7 @@ intervals.add({
 ```
 
 ### .count()
-returns the count of the intervals in the collection
+returns the count of intervals in the collection
 
 ```js
 intervals.count(); // 2
@@ -81,13 +81,13 @@ interval1.clear();
 ```
 
 ### .start()
-starts all the intervals in the collection.
+starts all intervals in the collection.
 ```js
 intervals.start();
 ```
 
 ### .clear()
-clears all the intervals in the collection. This can be used in the shutdown process to clear everything through one call.
+clears all intervals in the collection. This can be used in the shutdown process to clear everything through one call.
 ```js
 intervals.clear();
 ```
