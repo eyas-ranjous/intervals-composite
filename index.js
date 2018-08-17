@@ -1,3 +1,9 @@
+/**
+ * intervals-composite
+ * @copyright 2018 Eyas Ranjous <eyas.ranjous@gmail.com>
+ * @license MIT
+ */
+
 const intervals = {};
 let counter = 0;
 
