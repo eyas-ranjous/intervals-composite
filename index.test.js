@@ -18,16 +18,16 @@ describe('intervals tests', () => {
   it('should throw an error if cb is not a function', () => {
     expect(() => intervals.interval({ cb: 'test', ms: 10 }))
       .to.throw(Error).and.to
-      .have.property('message', '"cb" is not a valid callback function');
+      .have.property('message', 'cb "test" is not a valid callback function');
   });
 
   it('should throw an error if ms is not a number', () => {
     expect(() => intervals.interval({ cb: sinon.stub(), ms: 'test' }))
       .to.throw(Error).and.to
-      .have.property('message', '"ms" is not a valid milliseconds number');
+      .have.property('message', 'ms "test" is not a valid milliseconds number');
     expect(() => intervals.interval({ cb: sinon.stub(), ms: -100 }))
       .to.throw(Error).and.to
-      .have.property('message', '"ms" is not a valid milliseconds number');
+      .have.property('message', 'ms "-100" is not a valid milliseconds number');
   });
 
   it('should add & clear many intervals', (done) => {

@@ -6,10 +6,10 @@ const count = () => counter;
 const interval = (options) => {
   const { cb, ms } = options;
   if (!(typeof cb === 'function')) {
-    throw new Error('"cb" is not a valid callback function');
+    throw new Error(`cb "${cb}" is not a valid callback function`);
   }
   if (Number.isNaN(+ms) || ms < 0) {
-    throw new Error('"ms" is not a valid milliseconds number');
+    throw new Error(`ms "${ms}" is not a valid milliseconds number`);
   }
 
   let id = null;
@@ -40,11 +40,13 @@ const remove = (label) => {
 
 const removeAll = () => Object.keys(intervals).forEach(remove);
 
-const start = () => Object.keys(intervals)
-  .forEach(label => intervals[label].start());
+const start = () => (
+  Object.keys(intervals).forEach(label => intervals[label].start())
+);
 
-const clear = () => Object.keys(intervals)
-  .forEach(label => intervals[label].clear());
+const clear = () => (
+  Object.keys(intervals).forEach(label => intervals[label].clear())
+);
 
 module.exports = {
   interval,
