@@ -1,0 +1,42 @@
+{
+  "name": "intervals-composite",
+  "version": "0.1.0",
+  "description": "simplifies working with multiple intervals in a node app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eyas-ranjous/intervals-composite.git"
+  },
+  "keywords": [
+    "node interval",
+    "intervals",
+    "start interval",
+    "clear interval",
+    "intervals collection",
+    "interval shutdown",
+    "setInterval",
+    "clearInterval"
+  ],
+  "author": "Eyas Ranjous <eyas.ranjous@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eyas-ranjous/intervals-composite/issues"
+  },
+  "homepage": "https://github.com/eyas-ranjous/intervals-composite#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "grunt": "^1.0.3",
+    "grunt-eslint": "^21.0.0",
+    "grunt-mocha-istanbul": "^5.0.2",
+    "grunt-mocha-test": "^0.13.3",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "sinon": "^6.1.5"
+  }
+}
