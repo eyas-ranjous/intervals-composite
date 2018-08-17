@@ -1,17 +1,23 @@
 {
   "name": "intervals-composite",
   "version": "0.1.0",
-  "description": "enables starting multiple intervals in a project and clearing them through one call.",
+  "description": "simplifies working with multiple intervals in a node app.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eyas-ranjous/intervals-composite.git"
   },
   "keywords": [
-    "intervals"
+    "node interval",
+    "intervals",
+    "clear interval",
+    "intervals collection",
+    "interval shutdown",
+    "setInterval",
+    "clearInterval"
   ],
   "author": "Eyas Ranjous <eyas.ranjous@gmail.com>",
   "license": "MIT",
