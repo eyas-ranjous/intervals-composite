@@ -54,6 +54,26 @@ const clear = () => (
   Object.keys(intervals).forEach(label => intervals[label].clear())
 );
 
+const startSome = labels => (
+  labels.forEach(label => intervals[label].start())
+);
+
+const clearSome = labels => (
+  labels.forEach(label => intervals[label].clear())
+);
+
+const startExcept = labels => (
+  Object.keys(intervals).forEach(
+    label => !labels.includes(label) && intervals[label].start()
+  )
+);
+
+const clearExcept = labels => (
+  Object.keys(intervals).forEach(
+    label => !labels.includes(label) && intervals[label].clear()
+  )
+);
+
 module.exports = {
   interval,
   add,
@@ -62,5 +82,9 @@ module.exports = {
   removeAll,
   count,
   start,
-  clear
+  clear,
+  startSome,
+  clearSome,
+  startExcept,
+  clearExcept
 };

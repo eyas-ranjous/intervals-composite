@@ -1,6 +1,6 @@
 # intervals-composite
 
-[![build:?](https://travis-ci.org/eyas-ranjous/intervals-composite.svg?branch=master)](https://travis-ci.org/eyas-ranjous/intervals-composite) [![npm](https://img.shields.io/npm/v/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/intervals-composite)
+[![build:?](https://travis-ci.org/eyas-ranjous/intervals-composite.svg?branch=master)](https://travis-ci.org/eyas-ranjous/intervals-composite) [![npm](https://img.shields.io/npm/v/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/npm/dm/intervals-composite.svg)](https://www.npmjs.com/packages/eyas-ranjous/intervals-composite) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/intervals-composite)
 
 Having multiple intervals started in a node app can complicate the code especially in the shutdown process where intervals need to be cleared and modules are forced to expose their internal interval IDs. This package solves the problem by building a collection object that manages all intervals and provide an interface to work with them individually or as a composite.
 
@@ -90,6 +90,32 @@ intervals.start();
 clears all intervals in the collection. This can be used in the shutdown process to clear everything through one call.
 ```js
 intervals.clear();
+```
+
+### .startSome(labels)
+starts some intervals in the collection.
+```js
+intervals.start(['interval 1', 'interval 2']);
+```
+
+### .clearSome(labels)
+clears some intervals in the collection.
+```js
+intervals.start(['interval 1', 'interval 2']);
+```
+
+### .startExcept(labels)
+starts all intervals except some in the collection.
+```js
+// start all intervals except "interval 1" & "interval 2"
+intervals.startExcept(['interval 1', 'interval 2']);
+```
+
+### .clearExcept(labels)
+clears all intervals except some in the collection.
+```js
+// clears all intervals except "interval 1" & "interval 2"
+intervals.clearExcept(['interval 1', 'interval 2']);
 ```
 
 ### .remove(label)
