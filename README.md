@@ -118,12 +118,6 @@ clears all intervals except some in the collection.
 intervals.clearExcept(['interval 1', 'interval 2']);
 ```
 
-### .clear()
-clears all intervals in the collection. This can be used in the shutdown process to clear everything through one call.
-```js
-intervals.clear();
-```
-
 ### .remove(label)
 clears and removes an interval from the collection by its label.
 
