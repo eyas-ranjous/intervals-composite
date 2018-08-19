@@ -4,6 +4,7 @@ const intervals = require('./index');
 
 describe('intervals tests', () => {
   const cb = sinon.spy();
+
   it('should create & clear one interval', (done) => {
     const ms = 20;
     const interval = intervals.interval({ cb, ms });
@@ -53,10 +54,10 @@ describe('intervals tests', () => {
   });
 
   it('should start and clear intervals except some', (done) => {
-    intervals.startExcept(['interval 1', 'interval 2']);
+    intervals.startExcept(['interval 1', 'interval 2']); // start interval 3
     setTimeout(() => {
       expect(cb.callCount).to.equal(7);
-      intervals.clearExcept(['interval 1', 'interval 2']);
+      intervals.clearExcept(['interval 1', 'interval 2']); // clears interval 3
       done();
     }, 30);
   });
