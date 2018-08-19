@@ -107,15 +107,15 @@ intervals.start(['interval 1', 'interval 2']);
 ### .startExcept(labels)
 starts all intervals except some in the collection.
 ```js
-// start all intervals except "interval 1"
-intervals.startExcept(['interval 1']);
+// start all intervals except "interval 1" & "interval 2"
+intervals.startExcept(['interval 1', 'interval 2']);
 ```
 
 ### .clearExcept(labels)
 clears all intervals except some in the collection.
 ```js
-// clears all intervals except "interval 1"
-intervals.clearExcept(['interval 1']);
+// clears all intervals except "interval 1" & "interval 2"
+intervals.clearExcept(['interval 1', 'interval 2']);
 ```
 
 ### .clear()
