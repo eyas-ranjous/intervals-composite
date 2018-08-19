@@ -3,8 +3,8 @@ const sinon = require('sinon');
 const intervals = require('./index');
 
 describe('intervals tests', () => {
+  const cb = sinon.spy();
   it('should create & clear one interval', (done) => {
-    const cb = sinon.spy();
     const ms = 20;
     const interval = intervals.interval({ cb, ms });
     interval.start();
@@ -30,16 +30,33 @@ describe('intervals tests', () => {
       .have.property('message', 'ms "-100" is not a valid milliseconds number');
   });
 
-  it('should add & clear many intervals', (done) => {
-    const cb = sinon.spy();
+  it('should start & clear intervals', (done) => {
     const ms = 20;
     intervals.add({ label: 'interval 1', cb, ms });
     intervals.add({ label: 'interval 2', cb, ms });
     intervals.add({ label: 'interval 3', cb, ms });
     intervals.start();
     setTimeout(() => {
-      expect(cb.calledThrice).to.equal(true);
+      expect(cb.callCount).to.equal(4);
       intervals.clear();
+      done();
+    }, 30);
+  });
+
+  it('should start and clear some intervals', (done) => {
+    intervals.startSome(['interval 1', 'interval 2']);
+    setTimeout(() => {
+      expect(cb.callCount).to.equal(6);
+      intervals.clearSome(['interval 1', 'interval 2']);
+      done();
+    }, 30);
+  });
+
+  it('should start and clear intervals except some', (done) => {
+    intervals.startExcept(['interval 1', 'interval 2']);
+    setTimeout(() => {
+      expect(cb.callCount).to.equal(7);
+      intervals.clearExcept(['interval 1', 'interval 2']);
       done();
     }, 30);
   });
