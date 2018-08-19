@@ -1,6 +1,6 @@
 {
   "name": "intervals-composite",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "simplifies working with multiple intervals in a node app.",
   "main": "index.js",
   "scripts": {
