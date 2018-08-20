@@ -1,6 +1,6 @@
 /**
  * intervals-composite
- * @copyright 2018 Eyas Ranjous <eyas.ranjous@gmail.com>
+ * @copyright 2018 Eyas Ranjous <https://github.com/eyas-ranjous>
  * @license MIT
  */
 
@@ -11,6 +11,8 @@ const count = () => counter;
 
 const interval = (options) => {
   const { cb, ms } = options;
+  let id = null;
+
   if (!(typeof cb === 'function')) {
     throw new Error(`cb "${cb}" is not a valid callback function`);
   }
@@ -18,7 +20,6 @@ const interval = (options) => {
     throw new Error(`ms "${ms}" is not a valid milliseconds number`);
   }
 
-  let id = null;
   const start = () => { id = setInterval(cb, ms); };
   const clear = () => clearInterval(id);
   return { start, clear };
