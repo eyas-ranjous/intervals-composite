@@ -15,6 +15,9 @@ after installing the package, its exported object is cached on the first require
 ```js
 const intervals = require('intervals-composite');
 ```
+
+the exported object implements the following api:
+
 ### .interval(options)
 Creates a single interval object without adding it to the collection.
 
