@@ -10,13 +10,14 @@ npm install --save intervals-composite
 ```
 
 ## Usage
-
-### Creation
 after installing the package, its exported object is cached on the first require so you only need to require it in any module that needs an ineterval to work with.
 
 ```js
 const intervals = require('intervals-composite');
 ```
+
+the exported object implements the following api:
+
 ### .interval(options)
 Creates a single interval object without adding it to the collection.
 
@@ -52,7 +53,7 @@ intervals.add({
   ms: 3000
 });
 
-// in another module
+// in a different module
 intervals.add({
   label: 'module_2_interval',
   cb: () => { /* some code */ },
@@ -87,7 +88,7 @@ intervals.start();
 ```
 
 ### .clear()
-clears all intervals in the collection. This can be used in the shutdown process to clear everything through one call.
+clears all intervals in the collection. This is useful in the shutdown process to clear everything through one call.
 ```js
 intervals.clear();
 ```
@@ -95,13 +96,13 @@ intervals.clear();
 ### .startSome(labels)
 starts some intervals in the collection.
 ```js
-intervals.start(['interval 1', 'interval 2']);
+intervals.startSome(['interval 1', 'interval 2']);
 ```
 
 ### .clearSome(labels)
 clears some intervals in the collection.
 ```js
-intervals.start(['interval 1', 'interval 2']);
+intervals.clearSome(['interval 1', 'interval 2']);
 ```
 
 ### .startExcept(labels)
@@ -134,7 +135,6 @@ intervals.removeAll();
 
 intervals.count(); // 0
 ```
-
 
 ## Build
 ```
