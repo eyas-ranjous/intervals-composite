@@ -7,9 +7,9 @@
 const intervals = {};
 let counter = 0;
 
-const count = () => counter;
+exports.count = () => counter;
 
-const interval = (options) => {
+exports.interval = (options) => {
   const { cb, ms } = options;
   let id = null;
 
@@ -25,19 +25,19 @@ const interval = (options) => {
   return { start, clear };
 };
 
-const add = (options) => {
+exports.add = (options) => {
   const { label, cb, ms } = options;
   if (intervals[label] === undefined) {
-    intervals[label] = interval({ cb, ms });
+    intervals[label] = this.interval({ cb, ms });
     counter += 1;
   } else {
     throw new Error(`interval "${label}" already added`);
   }
 };
 
-const get = label => intervals[label] || null;
+exports.get = label => intervals[label] || null;
 
-const remove = (label) => {
+exports.remove = (label) => {
   if (intervals[label] !== undefined) {
     intervals[label].clear();
     delete intervals[label];
@@ -45,47 +45,34 @@ const remove = (label) => {
   }
 };
 
-const removeAll = () => Object.keys(intervals).forEach(remove);
+exports.removeAll = () => (
+  Object.keys(intervals).forEach(label => this.remove(label))
+);
 
-const start = () => (
+exports.start = () => (
   Object.keys(intervals).forEach(label => intervals[label].start())
 );
 
-const clear = () => (
+exports.clear = () => (
   Object.keys(intervals).forEach(label => intervals[label].clear())
 );
 
-const startSome = labels => (
+exports.startSome = labels => (
   labels.forEach(label => intervals[label].start())
 );
 
-const clearSome = labels => (
+exports.clearSome = labels => (
   labels.forEach(label => intervals[label].clear())
 );
 
-const startExcept = labels => (
+exports.startExcept = labels => (
   Object.keys(intervals).forEach(
     label => !labels.includes(label) && intervals[label].start()
   )
 );
 
-const clearExcept = labels => (
+exports.clearExcept = labels => (
   Object.keys(intervals).forEach(
     label => !labels.includes(label) && intervals[label].clear()
   )
 );
-
-module.exports = {
-  interval,
-  add,
-  get,
-  remove,
-  removeAll,
-  count,
-  start,
-  clear,
-  startSome,
-  clearSome,
-  startExcept,
-  clearExcept
-};
