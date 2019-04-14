@@ -100,7 +100,7 @@ intervals.startOne('module_1_interval');
 ```
 
 ### .clearOne()
-clears one interval from the collection.s
+clears one interval from the collections.
 ```js
 intervals.clearOne('module_1_interval');
 ```
