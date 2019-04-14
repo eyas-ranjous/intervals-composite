@@ -99,7 +99,7 @@ starts one interval from the collection.
 intervals.startOne('module_1_interval');
 ```
 
-### .clearOne()
+### .clearOne(label)
 clears one interval from the collections.
 ```js
 intervals.clearOne('module_1_interval');
