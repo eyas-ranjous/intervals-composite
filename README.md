@@ -93,6 +93,18 @@ clears all intervals in the collection. This is useful in the shutdown process t
 intervals.clear();
 ```
 
+### .startOne(label)
+starts one interval from the collection.
+```js
+intervals.startOne('module_1_interval');
+```
+
+### .clearOne(label)
+clears one interval from the collections.
+```js
+intervals.clearOne('module_1_interval');
+```
+
 ### .startSome(labels)
 starts some intervals in the collection.
 ```js

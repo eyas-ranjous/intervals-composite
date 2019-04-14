@@ -19,16 +19,25 @@ describe('intervals tests', () => {
   it('should throw an error if cb is not a function', () => {
     expect(() => intervals.interval({ cb: 'test', ms: 10 }))
       .to.throw(Error).and.to
-      .have.property('message', 'cb "test" is not a valid callback function');
+      .have.property(
+        'message',
+        'interval: cb "test" is not a valid cb function'
+      );
   });
 
   it('should throw an error if ms is not a number', () => {
     expect(() => intervals.interval({ cb: sinon.stub(), ms: 'test' }))
       .to.throw(Error).and.to
-      .have.property('message', 'ms "test" is not a valid milliseconds number');
+      .have.property(
+        'message',
+        'interval: ms "test" is not a valid ms number'
+      );
     expect(() => intervals.interval({ cb: sinon.stub(), ms: -100 }))
       .to.throw(Error).and.to
-      .have.property('message', 'ms "-100" is not a valid milliseconds number');
+      .have.property(
+        'message',
+        'interval: ms "-100" is not a valid ms number'
+      );
   });
 
   it('should start & clear intervals', (done) => {
@@ -44,10 +53,33 @@ describe('intervals tests', () => {
     }, 30);
   });
 
+  it('should start and clear one interval', (done) => {
+    intervals.startOne('interval 2');
+    setTimeout(() => {
+      expect(cb.callCount).to.equal(5);
+      intervals.clearOne('interval 2');
+      done();
+    }, 30);
+  });
+
+  it('should throw error when trying to start none-exsiting inteval', () => {
+    expect(() => intervals.startOne('not_found')).to.throw(Error)
+      .and.to.have.property(
+        'message',
+        'startOne: interval "not_found" not added'
+      );
+
+    expect(() => intervals.clearOne('not_found')).to.throw(Error)
+      .and.to.have.property(
+        'message',
+        'clearOne: interval "not_found" not added'
+      );
+  });
+
   it('should start and clear some intervals', (done) => {
     intervals.startSome(['interval 1', 'interval 2']);
     setTimeout(() => {
-      expect(cb.callCount).to.equal(6);
+      expect(cb.callCount).to.equal(7);
       intervals.clearSome(['interval 1', 'interval 2']);
       done();
     }, 30);
@@ -56,7 +88,7 @@ describe('intervals tests', () => {
   it('should start and clear intervals except some', (done) => {
     intervals.startExcept(['interval 1', 'interval 2']); // start interval 3
     setTimeout(() => {
-      expect(cb.callCount).to.equal(7);
+      expect(cb.callCount).to.equal(8);
       intervals.clearExcept(['interval 1', 'interval 2']); // clears interval 3
       done();
     }, 30);
@@ -64,7 +96,10 @@ describe('intervals tests', () => {
 
   it('should throw an error when trying to add an existing interval', () => {
     expect(() => intervals.add({ label: 'interval 1' })).to.throw(Error)
-      .and.to.have.property('message', 'interval "interval 1" already added');
+      .and.to.have.property(
+        'message',
+        'add: interval "interval 1" already added'
+      );
   });
 
   it(

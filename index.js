@@ -14,10 +14,10 @@ exports.interval = (options) => {
   let id = null;
 
   if (!(typeof cb === 'function')) {
-    throw new Error(`cb "${cb}" is not a valid callback function`);
+    throw new Error(`interval: cb "${cb}" is not a valid cb function`);
   }
-  if (Number.isNaN(+ms) || ms < 0) {
-    throw new Error(`ms "${ms}" is not a valid milliseconds number`);
+  if (!(+ms > 0)) {
+    throw new Error(`interval: ms "${ms}" is not a valid ms number`);
   }
 
   const start = () => { id = setInterval(cb, ms); };
@@ -27,12 +27,11 @@ exports.interval = (options) => {
 
 exports.add = (options) => {
   const { label, cb, ms } = options;
-  if (intervals[label] === undefined) {
-    intervals[label] = this.interval({ cb, ms });
-    counter += 1;
-  } else {
-    throw new Error(`interval "${label}" already added`);
+  if (intervals[label] !== undefined) {
+    throw new Error(`add: interval "${label}" already added`);
   }
+  intervals[label] = this.interval({ cb, ms });
+  counter += 1;
 };
 
 exports.get = label => intervals[label] || null;
@@ -56,6 +55,20 @@ exports.start = () => (
 exports.clear = () => (
   Object.keys(intervals).forEach(label => intervals[label].clear())
 );
+
+exports.startOne = (label) => {
+  if (intervals[label] === undefined) {
+    throw new Error(`startOne: interval "${label}" not added`);
+  }
+  intervals[label].start();
+};
+
+exports.clearOne = (label) => {
+  if (intervals[label] === undefined) {
+    throw new Error(`clearOne: interval "${label}" not added`);
+  }
+  intervals[label].clear();
+};
 
 exports.startSome = labels => (
   labels.forEach(label => intervals[label].start())
