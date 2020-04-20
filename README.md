@@ -80,20 +80,44 @@ const interval = new Interval({
 #### .getLabel()
 gets the interval label.
 
+```js
+console.log(interval.getLabel()); // 'test-interval'
+```
+
 #### .getMs()
 gets the interval ms.
+
+```js
+console.log(interval.getMs()); // 3000
+```
 
 #### .getCb()
 gets the interval callback.
 
+```js
+console.log(interval.getCb()); // [Function: someFunction]
+```
+
 #### .start()
 starts the interval.
+
+```js
+interval.start();
+```
 
 #### .isRunning()
 checks if the interval is running.
 
+```js
+console.log(interval.isRunning()); // true
+```
+
 #### .clear()
 clears the interval
+
+```js
+interval.clear();
+```
 
 ### IntervalComposite
 
@@ -132,7 +156,6 @@ checks if a label exists.
 ```js
 console.log(intervalcomposite.has('orders')); // true
 ```
-
 
 #### .get(label)
 gets an interval by its label.
