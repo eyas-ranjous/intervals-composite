@@ -93,12 +93,14 @@ class IntervalComposite {
     if (typeof cb !== 'function') {
       throw new Error('IntervalComposite.filter invalid callback');
     }
+
     const filtered = new IntervalComposite(label);
     this._intervals.forEach((interval) => {
       if (cb(interval)) {
         filtered.add(interval);
       }
     });
+
     return filtered;
   }
 
