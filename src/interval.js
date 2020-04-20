@@ -6,7 +6,8 @@
 
 /**
  * @class
- * represents an individual interval object
+ * represents an individual interval
+ * that runs a callback every number of milliseconds
  */
 class Interval {
   constructor({ cb, ms, label }) {
