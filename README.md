@@ -78,42 +78,143 @@ const interval = new Interval({
 ```
 
 #### .getLabel()
+gets the interval label.
 
 #### .getMs()
+gets the interval ms.
 
 #### .getCb()
+gets the interval callback.
 
 #### .start()
+starts the interval.
 
 #### .isRunning()
+checks if the interval is running.
 
 #### .clear()
+clears the interval
 
 ### IntervalComposite
 
 #### Construction
 
+```js
+const dataLoaders = new IntervalComposite('data-loaders');
+```
+
 #### .add(interval)
+adds an interval.
+
+```js
+dataLoaders.add(new Interval({
+  cb: () => { /* some code */ },
+  ms: 70000,
+  label: 'users' 
+}));
+
+dataLoaders.add(new Interval({
+  cb: () => { /* some code */ },
+  ms: 30000,
+  label: 'products' 
+}));
+
+dataLoaders.add(new Interval({
+  cb: () => { /* some code */ },
+  ms: 10000,
+  label: 'orders' 
+}));
+```
 
 #### .has(label)
+checks if a label exists.
+
+```js
+console.log(intervalcomposite.has('orders')); // true
+```
+
 
 #### .get(label)
+gets an interval by its label.
+
+```js
+const ordersInterval = intervalcomposite.get('orders');
+
+console.log(ordersInterval.getLabel()); // orders
+console.log(ordersInterval.isRunning()); // false
+```
 
 #### .getLabel()
+gets the composite label.
+
+```js
+console.log(dataLoaders.getLabel()); // data-loaders
+```
 
 #### .forEach()
+traverses the intervals.
+
+```js
+IntervalComposite.forEach((interval) => {
+  console.log(interval.getLabel());
+});
+
+/*
+users
+products
+orders
+*/
+```
 
 #### .filter()
+filters the intervals using a callback.
+
+```js
+const filtered = IntervalComposite.filter((i) => i.getMs() > 20000);
+
+filtered.forEach((interval) => {
+  console.log(interval.getLabel());
+});
+/*
+users
+products
+*/
+```
 
 #### .toArray()
+converts the composite into an array of intervals.
+
+```js
+console.log(intervalcomposite.toArray());
+```
 
 #### .count()
+gets the count of intervals.
+
+```js
+console.log(intervalcomposite.count()); // 3
+```
 
 #### .start()
+starts the intervals
+
+```js
+console.log(intervalcomposite.start()); // 3
+```
 
 #### .isRunning()
+checks if the intervals are started.
+
+```js
+console.log(intervalcomposite.isRunning()); // true
+```
 
 #### .clear()
+clears the intervals.
+```js
+intervalcomposite.clear();
+console.log(intervalcomposite.isRunning()); // false
+```
 
 ## Build
 ```
