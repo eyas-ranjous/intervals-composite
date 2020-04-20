@@ -18,16 +18,6 @@ class IntervalComposite {
 
   /**
    * @public
-   * checks if an interval exists
-   * @param {string} label
-   * @return {boolean}
-   */
-  has(label) {
-    return this._intervals.has(label);
-  }
-
-  /**
-   * @public
    * adds an interval to the composite
    * @param {Interval} interval
    * @throws {Error}
@@ -44,6 +34,16 @@ class IntervalComposite {
     }
 
     this._intervals.set(interval.getLabel(), interval);
+  }
+
+  /**
+   * @public
+   * checks if an interval exists
+   * @param {string} label
+   * @return {boolean}
+   */
+  has(label) {
+    return this._intervals.has(label);
   }
 
   /**
