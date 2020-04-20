@@ -19,6 +19,7 @@ class IntervalComposite {
   /**
    * @public
    * checks if an interval exists
+   * @param {string} label
    * @return {boolean}
    */
   has(label) {
@@ -28,7 +29,7 @@ class IntervalComposite {
   /**
    * @public
    * adds an interval to the composite
-   * @param {object} interval props
+   * @param {Interval} interval
    * @throws {Error}
    */
   add(interval) {
@@ -48,7 +49,8 @@ class IntervalComposite {
   /**
    * @public
    * gets the interval by its label
-   * @return {boolean}
+   * @param {string} label
+   * @return {Interval}
    */
   get(label) {
     if (!this._intervals.has(label)) return null;
@@ -68,6 +70,7 @@ class IntervalComposite {
   /**
    * @public
    * loop on the intervals
+   * @param {function} cb
    * @throws {Error}
    */
   forEach(cb) {
@@ -81,6 +84,9 @@ class IntervalComposite {
   /**
    * @public
    * filters the intervals using a callback
+   * @param {function} cb
+   * @param {string} label
+   * @return {IntervalComposite}
    * @throws {Error}
    */
   filter(cb, label = '') {
