@@ -14,6 +14,7 @@ class IntervalComposite {
   constructor(label) {
     this._label = label || '';
     this._intervals = new Map();
+    this._isRunning = false;
   }
 
   /**
@@ -116,6 +117,14 @@ class IntervalComposite {
 
   /**
    * @public
+   * @return {boolean}
+   */
+  isRunning() {
+    return this._isRunning;
+  }
+
+  /**
+   * @public
    * @return {number}
    */
   count() {
@@ -128,6 +137,7 @@ class IntervalComposite {
    */
   start() {
     this._intervals.forEach((interval) => interval.start());
+    this._isRunning = true;
   }
 
   /**
@@ -136,6 +146,7 @@ class IntervalComposite {
    */
   clear() {
     this._intervals.forEach((interval) => interval.clear());
+    this._isRunning = false;
   }
 }
 

@@ -23,6 +23,7 @@ class Interval {
     this._ms = ms;
     this._label = label || '';
     this._timeout = null;
+    this._isRunning = false;
   }
 
   /**
@@ -54,7 +55,7 @@ class Interval {
    * @return {boolean}
    */
   isRunning() {
-    return this._timeout !== null;
+    return this._isRunning;
   }
 
   /**
@@ -63,6 +64,7 @@ class Interval {
    */
   start() {
     this._timeout = setInterval(this._cb, this._ms);
+    this._isRunning = true;
   }
 
   /**
@@ -71,6 +73,7 @@ class Interval {
    */
   clear() {
     clearInterval(this._timeout);
+    this._isRunning = false;
     this._timeout = null;
   }
 }

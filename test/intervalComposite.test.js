@@ -122,6 +122,12 @@ describe('IntervalComposite tests', () => {
     });
   });
 
+  describe('isRunning', () => {
+    it('checks if the composite is running', () => {
+      expect(intervalComposite.isRunning()).to.equal(true);
+    });
+  });
+
   describe('.clear()', () => {
     it('clears the intervals', () => {
       intervalComposite.clear();
