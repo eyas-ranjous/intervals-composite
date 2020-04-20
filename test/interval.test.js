@@ -62,12 +62,6 @@ describe('Interval tests', () => {
     });
   });
 
-  describe('.toString()', () => {
-    it('gets the string version', () => {
-      expect(interval.toString()).to.equal('test-interval:20');
-    });
-  });
-
   describe('.clear()', () => {
     it('clears the interval', () => {
       interval.clear();

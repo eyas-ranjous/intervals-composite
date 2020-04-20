@@ -59,14 +59,6 @@ class Interval {
 
   /**
    * @public
-   * @return {string}
-   */
-  toString() {
-    return `${this._label}:${this._ms}`;
-  }
-
-  /**
-   * @public
    * starts the interval
    */
   start() {
