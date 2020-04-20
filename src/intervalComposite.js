@@ -8,7 +8,7 @@ const Interval = require('./interval');
 
 /**
  * @class
- * represents a composite of Interval objects
+ * represents a composite of Intervals
  */
 class IntervalComposite {
   constructor(label) {
@@ -21,12 +21,8 @@ class IntervalComposite {
    * checks if an interval exists
    * @return {boolean}
    */
-  has(interval) {
-    if (!(interval instanceof Interval)) {
-      throw new Error('IntervalComposite.has invalid Interval');
-    }
-
-    return this._intervals.has(interval.getLabel());
+  has(label) {
+    return this._intervals.has(label);
   }
 
   /**
@@ -40,9 +36,9 @@ class IntervalComposite {
       throw new Error('IntervalComposite.add invalid interval');
     }
 
-    if (this.has(interval)) {
+    if (this.has(interval.getLabel())) {
       throw new Error(
-        `IntervalComposite.add "${interval.getLabel()}" already added`
+        `IntervalComposite.add "${interval.getLabel()}" label already exists`
       );
     }
 
@@ -51,7 +47,7 @@ class IntervalComposite {
 
   /**
    * @public
-   * checks if an interval exists
+   * gets the interval by its label
    * @return {boolean}
    */
   get(label) {
@@ -62,6 +58,7 @@ class IntervalComposite {
 
   /**
    * @public
+   * gets the composite label
    * @return {string}
    */
   getLabel() {
