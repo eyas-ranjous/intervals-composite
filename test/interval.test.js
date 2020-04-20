@@ -16,6 +16,16 @@ describe('Interval tests', () => {
       expect(interval).to.be.instanceof(Interval);
       expect(interval.isRunning()).to.equal(false);
     });
+
+    it('throws an error if cb is invalid function', () => {
+      expect(() => new Interval({ ms: 10 })).to.throw(Error)
+        .and.to.have.property('message', 'Interval: invalid callback function');
+    });
+
+    it('throws an error if ms is invalid number', () => {
+      expect(() => new Interval({ cb: sinon.stub() })).to.throw(Error)
+        .and.to.have.property('message', 'Interval: invalid ms number');
+    });
   });
 
   describe('.getLabel()', () => {
