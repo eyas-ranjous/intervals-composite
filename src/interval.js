@@ -21,6 +21,7 @@ class Interval {
     this._cb = cb;
     this._ms = ms;
     this._label = label || '';
+    this._timeout = null;
   }
 
   /**
@@ -52,8 +53,7 @@ class Interval {
    * @return {boolean}
    */
   isRunning() {
-    // eslint-disable-next-line no-underscore-dangle
-    return (this._timeout && !this._timeout._destroyed) || false;
+    return this._timeout !== null;
   }
 
   /**
@@ -78,6 +78,7 @@ class Interval {
    */
   clear() {
     clearInterval(this._timeout);
+    this._timeout = null;
   }
 }
 
