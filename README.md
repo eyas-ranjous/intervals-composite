@@ -2,18 +2,97 @@
 
 [![build:?](https://travis-ci.org/js-shelf/intervals-composite.svg?branch=master)](https://travis-ci.org/js-shelf/intervals-composite) [![npm](https://img.shields.io/npm/v/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/npm/dm/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/intervals-composite)
 
-Having multiple intervals started in a node app can complicate the code especially in the shutdown process where intervals need to be cleared and modules are forced to expose their internal interval IDs. This package solves the problem by building a collection object that manages all intervals and provide an interface to work with them individually or as a composite.
+Encapsulate javascript `.setInterval` & `.clearInterval` into an Interval object. It also adds an IntervalComposite that enables working with multiple intervals in an application as an individual one.
 
-## Install
-```
+# Table of Contents
+* [Install](#install)
+* [API](#api)
+  * [require](#require)
+  * [import](#import)
+  * [Interval](#interval)
+    * [Construction](#construction)
+    * [.getLabel()](#getlabel)
+    * [.getMs()](#getms)
+    * [.getCb()](#getcb)
+    * [.start()](#start)
+    * [.clear()](#clear)
+  * [IntervalComposite](#intervalcomposite)
+    * [Construction](#construction)
+    * [.add(interval)](#addinterval)
+    * [.start()](#start)
+    * [.clear()](#clear)
+ * [Build](#build)
+ * [License](#license)
+
+## install
+```sh
 npm install --save intervals-composite
 ```
+
+## API
+
+### require
+
+```js
+const { Interval, IntervalComposite } = require('intervals-composite');
+```
+
+### import
+
+```js
+import { Interval, IntervalComposite } from 'intervals-composite';
+```
+
+### Interval
+represents a single interval.
+
+#### Construction
+
+```js
+const interval = new Interval({
+  cb: () => console.log('test'),
+  ms: 3000,
+  label: 'test-interval'
+});
+
+// OR, if you have the callback in another object 
+
+const handler = {
+  someFunction: () => console.log()
+};
+
+const interval = new Interval({
+  cb: handler.someFunction,
+  ms: 3000,
+  label: 'test-interval'
+});
+```
+
+#### .getLabel()
+
+#### .getMs()
+
+#### .getCb()
+
+#### .start()
+
+#### .clear()
+
+### IntervalComposite
+
+#### Construction
+
+#### .add(interval)
+
+#### .start()
+
+#### .clear()
 
 ## Usage
 after installing the package, its exported object is cached on the first require so you only need to require it in any module that needs an ineterval to work with.
 
 ```js
-const intervals = require('intervals-composite');
+const { Interval, IntervalComposite } = require('intervals-composite');
 ```
 
 the exported object implements the following api:
