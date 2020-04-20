@@ -1,6 +1,6 @@
 # intervals-composite
 
-[![build:?](https://travis-ci.org/js-shelf/intervals-composite.svg?branch=master)](https://travis-ci.org/js-shelf/intervals-composite) [![npm](https://img.shields.io/npm/v/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/npm/dm/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/intervals-composite)
+[![build:?](https://travis-ci.org/node-work/intervals-composite.svg?branch=master)](https://travis-ci.org/node-work/intervals-composite) [![npm](https://img.shields.io/npm/v/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/npm/dm/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/intervals-composite)
 
 Encapsulate javascript `.setInterval` & `.clearInterval` into an Interval object. It also adds an IntervalComposite that enables working with multiple intervals in an application as an individual one.
 
@@ -233,5 +233,5 @@ grunt build
 ```
 
 ## License
-The MIT License. Full License is [here](https://github.com/js-shelf/intervals-composite/blob/master/LICENSE)
+The MIT License. Full License is [here](https://github.com/node-work/intervals-composite/blob/master/LICENSE)
 
