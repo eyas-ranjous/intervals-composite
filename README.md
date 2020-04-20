@@ -2,7 +2,7 @@
 
 [![build:?](https://travis-ci.org/node-work/intervals-composite.svg?branch=master)](https://travis-ci.org/node-work/intervals-composite) [![npm](https://img.shields.io/npm/v/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/npm/dm/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/intervals-composite)
 
-Encapsulate javascript `.setInterval` & `.clearInterval` into an Interval object. It also adds an IntervalComposite that enables working with multiple intervals in an application as an individual one.
+Encapsulate javascript `.setInterval` & `.clearInterval` into an Interval class. It also adds an IntervalComposite that enables working with multiple intervals in an application as an individual one.
 
 # Table of Contents
 * [Install](#install)
@@ -15,10 +15,18 @@ Encapsulate javascript `.setInterval` & `.clearInterval` into an Interval object
     * [.getMs()](#getms)
     * [.getCb()](#getcb)
     * [.start()](#start)
+    * [.isRunning](#isrunning)
     * [.clear()](#clear)
   * [IntervalComposite](#intervalcomposite)
     * [Construction](#construction)
     * [.add(interval)](#addinterval)
+    * [.has(label)](#haslabel)
+    * [.get(label)](#getlabel-)
+    * [.getLabel()](#getlabel)
+    * [.forEach(cb)](#foreachcb)
+    * [.filter(cb, label)](#filtercb-label)
+    * [.toArray()](#toarray)
+    * [.count()](#count)
     * [.start()](#start)
     * [.clear()](#clear)
  * [Build](#build)
