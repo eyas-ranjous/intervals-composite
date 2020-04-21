@@ -29,7 +29,7 @@ Encapsulate javascript `.setInterval` & `.clearInterval` into an Interval class.
     * [.count()](#count)
     * <a href="#start-2">.start()</a>
     * <a href="#isrunning-2">.isRunning()</a>
-    * <a href="#clear-2">.isRunning()</a>
+    * <a href="#clear-2">.clear()</a>
  * [Build](#build)
  * [License](#license)
 
