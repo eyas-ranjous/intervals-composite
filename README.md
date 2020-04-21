@@ -93,7 +93,9 @@ const interval = new Interval({
 ```
 
 <h4><a id="getLabel-1"></a>.getLabel()</h4>
+
 gets the interval label.
+
 
 <table>
  <tr><th>return</th></tr>
