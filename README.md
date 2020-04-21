@@ -241,7 +241,7 @@ checks if a label exists.
 #### Example
 
 ```js
-console.log(intervalcomposite.has('orders')); // true
+console.log(dataLoaders.has('orders')); // true
 ```
 
 <h4><a id="getlabel-2"></a>.get(label)</h4>
@@ -258,7 +258,7 @@ gets an interval by its label.
 ##### Example
 
 ```js
-const ordersInterval = intervalcomposite.get('orders');
+const ordersInterval = dataLoaders.get('orders');
 
 console.log(ordersInterval.getLabel()); // orders
 console.log(ordersInterval.isRunning()); // false
@@ -295,7 +295,7 @@ traverses the intervals.
 ##### Example
 
 ```js
-IntervalComposite.forEach((interval) => {
+dataLoaders.forEach((interval) => {
   console.log(interval.getLabel());
 });
 
@@ -325,11 +325,11 @@ filters the intervals using a callback. It also accept an optional label to name
 ##### Example
 
 ```js
-const slowIntervals = IntervalComposite.filter((i) => i.getMs() > 20000, 'slow-intervals');
+const slowLoaders = dataLoaders.filter((i) => i.getMs() > 20000, 'slow-intervals');
 
-console.log(slowIntervals.getLabel()); // slow-intervals
+console.log(slowLoaders.getLabel()); // slow-intervals
 
-slowIntervals.forEach((interval) => console.log(interval.getLabel()));
+slowLoaders.forEach((interval) => console.log(interval.getLabel()));
 /*
 users
 products
@@ -349,7 +349,7 @@ converts the composite into an array of intervals.
 ##### Example
 
 ```js
-console.log(intervalcomposite.toArray());
+console.log(dataLoaders.toArray());
 ```
 
 #### .count()
@@ -365,7 +365,7 @@ gets the count of intervals.
 ##### Example
 
 ```js
-console.log(intervalcomposite.count()); // 3
+console.log(dataLoaders.count()); // 3
 ```
 
 <h4><a id="start-2"></a>.start()</h4>
@@ -375,7 +375,7 @@ starts the intervals
 ##### Example
 
 ```js
-console.log(intervalcomposite.start()); // 3
+console.log(dataLoaders.start()); // 3
 ```
 
 <h4><a id="isrunning-2"></a>.isRunning()</h4>
@@ -392,7 +392,7 @@ checks if the intervals are started.
 ##### Example
 
 ```js
-console.log(intervalcomposite.isRunning()); // true
+console.log(dataLoaders.isRunning()); // true
 ```
 
 <h4><a id="clear-2"></a>.clear()</h4>
@@ -402,8 +402,8 @@ clears the intervals.
 ##### Example
 
 ```js
-intervalcomposite.clear();
-console.log(intervalcomposite.isRunning()); // false
+dataLoaders.clear();
+console.log(dataLoaders.isRunning()); // false
 ```
 
 ## Build
