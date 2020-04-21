@@ -2,7 +2,7 @@
 
 [![build:?](https://travis-ci.org/node-work/intervals-composite.svg?branch=master)](https://travis-ci.org/node-work/intervals-composite) [![npm](https://img.shields.io/npm/v/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/npm/dm/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/intervals-composite)
 
-Encapsulate javascript `.setInterval` & `.clearInterval` into an Interval class. It also adds an IntervalComposite that enables working with multiple intervals in an application as an individual one.
+Encapsulate javascript `.setInterval` & `.clearInterval` into an Interval class. It also adds an IntervalComposite that simplifies working with multiple intervals in an application.
 
 # Table of Contents
 * [Install](#install)
@@ -21,7 +21,7 @@ Encapsulate javascript `.setInterval` & `.clearInterval` into an Interval class.
     * <a href="#construction-2">Construction</a>
     * [.add(interval)](#addinterval)
     * [.has(label)](#haslabel)
-    * <a href="#getlabel-2">.getLabel()</a>
+    * <a href="#getlabel-2">.get(label)</a>
     * <a href="#getlabel-3">.getLabel()</a>
     * [.forEach(cb)](#foreachcb)
     * [.filter(cb, label)](#filtercb-label)
@@ -53,7 +53,6 @@ import { Interval, IntervalComposite } from 'intervals-composite';
 ```
 
 ### Interval
-represents a single interval.
 
 <h4><a id="construction-1"></a>Construction</h4>
 
@@ -170,6 +169,8 @@ clears the interval
 
 ```js
 interval.clear();
+
+console.log(interval.isRunning()); // false
 ```
 
 ### IntervalComposite
@@ -243,7 +244,8 @@ checks if a label exists.
 console.log(intervalcomposite.has('orders')); // true
 ```
 
-#### .get(label)
+<h4><a id="getlabel-2"></a>.get(label)</h4>
+
 gets an interval by its label.
 
 <table>
@@ -262,7 +264,8 @@ console.log(ordersInterval.getLabel()); // orders
 console.log(ordersInterval.isRunning()); // false
 ```
 
-#### .getLabel()
+<h4><a id="getlabel-3"></a>.getLabel()</h4>
+
 gets the composite label.
 
 <table>
@@ -365,7 +368,8 @@ gets the count of intervals.
 console.log(intervalcomposite.count()); // 3
 ```
 
-#### .start()
+<h4><a id="start-2"></a>.start()</h4>
+
 starts the intervals
 
 ##### Example
@@ -374,7 +378,8 @@ starts the intervals
 console.log(intervalcomposite.start()); // 3
 ```
 
-#### .isRunning()
+<h4><a id="isrunning-2"></a>.isRunning()</h4>
+
 checks if the intervals are started.
 
 <table>
@@ -390,7 +395,8 @@ checks if the intervals are started.
 console.log(intervalcomposite.isRunning()); // true
 ```
 
-#### .clear()
+<h4><a id="clear-2"></a>.clear()</h4>
+
 clears the intervals.
 
 ##### Example
