@@ -1,151 +1,409 @@
 # intervals-composite
 
-[![build:?](https://travis-ci.org/js-shelf/intervals-composite.svg?branch=master)](https://travis-ci.org/js-shelf/intervals-composite) [![npm](https://img.shields.io/npm/v/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/npm/dm/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/intervals-composite)
+[![build:?](https://travis-ci.org/node-work/intervals-composite.svg?branch=master)](https://travis-ci.org/node-work/intervals-composite) [![npm](https://img.shields.io/npm/v/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/npm/dm/intervals-composite.svg)](https://www.npmjs.com/package/intervals-composite) [![npm](https://img.shields.io/badge/node-%3E=%206.0-blue.svg)](https://www.npmjs.com/package/intervals-composite)
 
-Having multiple intervals started in a node app can complicate the code especially in the shutdown process where intervals need to be cleared and modules are forced to expose their internal interval IDs. This package solves the problem by building a collection object that manages all intervals and provide an interface to work with them individually or as a composite.
+Encapsulate javascript `.setInterval` & `.clearInterval` into an Interval class. It also adds an IntervalComposite that simplifies working with multiple intervals in an application.
 
-## Install
-```
+# Table of Contents
+* [Install](#install)
+* [API](#api)
+  * [require](#require)
+  * [import](#import)
+  * [Interval](#interval)
+    * <a href="#construction-1">Construction</a>
+    * <a href="#getlabel-1">.getLabel()</a>
+    * [.getMs()](#getms)
+    * [.getCb()](#getcb)
+    * <a href="#start-1">.start()</a>
+    * <a href="#isrunning-1">.isRunning()</a>
+    * <a href="#clear-1">.clear()</a>
+  * [IntervalComposite](#intervalcomposite)
+    * <a href="#construction-2">Construction</a>
+    * [.add(interval)](#addinterval)
+    * [.has(label)](#haslabel)
+    * <a href="#getlabel-2">.get(label)</a>
+    * <a href="#getlabel-3">.getLabel()</a>
+    * [.forEach(cb)](#foreachcb)
+    * [.filter(cb, label)](#filtercb-label)
+    * [.toArray()](#toarray)
+    * [.count()](#count)
+    * <a href="#start-2">.start()</a>
+    * <a href="#isrunning-2">.isRunning()</a>
+    * <a href="#clear-2">.clear()</a>
+ * [Build](#build)
+ * [License](#license)
+
+## install
+```sh
 npm install --save intervals-composite
 ```
 
-## Usage
-after installing the package, its exported object is cached on the first require so you only need to require it in any module that needs an ineterval to work with.
+## API
+
+### require
 
 ```js
-const intervals = require('intervals-composite');
+const { Interval, IntervalComposite } = require('intervals-composite');
 ```
 
-the exported object implements the following api:
-
-### .interval(options)
-Creates a single interval object without adding it to the collection.
-
-the returned object encapsulates node global functions and exposes the following interface
-#### .start()
-start the interval
-
-#### .clear()
-clear the interval
+### import
 
 ```js
-const testInterval = intervals.interval({
-  cb: () => { /* some code */ },
-  ms: 3000 // 3 seconds
+import { Interval, IntervalComposite } from 'intervals-composite';
+```
+
+### Interval
+
+<h4><a id="construction-1"></a>Construction</h4>
+
+<table>
+  <tr><th align="center" colspan="3">constructor(params)</th></tr>
+  <tr><td><b>name</b></td><td align="center"><b>type</b></td><td align="center"><b>props</b></td></tr>
+  <tr>
+    <td>params</td>
+    <td>object</td>
+    <td>
+      cb <i>function</i><br><br>
+      ms <i>number</i><br><br>
+      label <i>string</i><br><br>
+    </td>
+  </tr>
+</table>
+
+##### Example
+
+```js
+const interval = new Interval({
+  cb: () => console.log('test'),
+  ms: 3000,
+  label: 'test-interval'
 });
 
-// somewhere in the code, you can start it
-testInterval.start();
+// OR, if you have the callback in another object 
 
-// somewhere else in the code, you can clear it
-testInterval.clear();
-```
+const handler = {
+  someFunction: () => console.log()
+};
 
-### .add(options)
-Creates an interval and add it to the collection
-```js
-const intervals = require('intervals-composite');
-
-// in some module
-intervals.add({
-  label: 'module_1_interval', // a unique name
-  cb: () => { /* some code */ },
-  ms: 3000
-});
-
-// in a different module
-intervals.add({
-  label: 'module_2_interval',
-  cb: () => { /* some code */ },
-  ms: 10000
+const interval = new Interval({
+  cb: handler.someFunction,
+  ms: 3000,
+  label: 'test-interval'
 });
 ```
 
-### .count()
-returns the count of intervals in the collection
+<h4><a id="getLabel-1"></a>.getLabel()</h4>
+
+gets the interval label.
+
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>string</td>
+ </tr>
+</table>
+
+##### Example
 
 ```js
-intervals.count(); // 2
+console.log(interval.getLabel()); // 'test-interval'
 ```
 
-### .get(label)
-return an added interval object or null if it does not exist.
+#### .getMs()
+gets the interval ms.
+
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>number</td>
+ </tr>
+</table>
+
+##### Example
 
 ```js
-const inetrval1 = intervals.get('module_1_interval');
-
-// you can start this interval
-interval1.start();
-
-// or clear it
-interval1.clear();
+console.log(interval.getMs()); // 3000
 ```
 
-### .start()
-starts all intervals in the collection.
-```js
-intervals.start();
-```
+#### .getCb()
+gets the interval callback.
 
-### .clear()
-clears all intervals in the collection. This is useful in the shutdown process to clear everything through one call.
-```js
-intervals.clear();
-```
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>function</td>
+ </tr>
+</table>
 
-### .startOne(label)
-starts one interval from the collection.
-```js
-intervals.startOne('module_1_interval');
-```
-
-### .clearOne(label)
-clears one interval from the collections.
-```js
-intervals.clearOne('module_1_interval');
-```
-
-### .startSome(labels)
-starts some intervals in the collection.
-```js
-intervals.startSome(['interval 1', 'interval 2']);
-```
-
-### .clearSome(labels)
-clears some intervals in the collection.
-```js
-intervals.clearSome(['interval 1', 'interval 2']);
-```
-
-### .startExcept(labels)
-starts all intervals except some in the collection.
-```js
-// start all intervals except "interval 1" & "interval 2"
-intervals.startExcept(['interval 1', 'interval 2']);
-```
-
-### .clearExcept(labels)
-clears all intervals except some in the collection.
-```js
-// clears all intervals except "interval 1" & "interval 2"
-intervals.clearExcept(['interval 1', 'interval 2']);
-```
-
-### .remove(label)
-clears and removes an interval from the collection by its label.
+##### Example
 
 ```js
-intervals.remove('module_1_interval');
-
-intervals.get('module_1_interval'); // null
+console.log(interval.getCb()); // [Function: someFunction]
 ```
 
-### .removeAll()
-clears and removes all intervals from the collection.
-```
-intervals.removeAll();
+<h4><a id="start-1"></a>.start()</h4>
 
-intervals.count(); // 0
+starts the interval.
+
+##### Example
+
+```js
+interval.start();
+```
+
+<h4><a id="isrunning-1"></a>.isRunning()</h4>
+
+checks if the interval is running.
+
+##### Example
+
+```js
+console.log(interval.isRunning()); // true
+```
+
+<h4><a id="clear-1"></a>.clear()</h4>
+
+clears the interval
+
+##### Example
+
+```js
+interval.clear();
+
+console.log(interval.isRunning()); // false
+```
+
+### IntervalComposite
+
+<h4><a id="construction-2"></a>Construction</h4>
+
+<table>
+  <tr><th align="center" colspan="2">constructor(label)</th></tr>
+  <tr><td><b>name</b></td><td><b>type</b></td></tr>
+  <tr>
+    <td>label</td>
+    <td>string</td>
+  </tr>
+</table>
+
+#### Example
+
+```js
+const dataLoaders = new IntervalComposite('data-loaders');
+```
+
+#### .add(interval)
+adds an interval.
+
+<table>
+  <tr><th align="center" colspan="2">params</th></tr>
+  <tr><td><b>name</b></td><td><b>type</b></td></tr>
+  <tr>
+    <td>interval</td>
+    <td>Interval</td>
+  </tr>
+</table>
+
+#### Example
+
+```js
+dataLoaders.add(new Interval({
+  cb: () => { /* some code */ },
+  ms: 70000,
+  label: 'users' 
+}));
+
+dataLoaders.add(new Interval({
+  cb: () => { /* some code */ },
+  ms: 30000,
+  label: 'products' 
+}));
+
+dataLoaders.add(new Interval({
+  cb: () => { /* some code */ },
+  ms: 10000,
+  label: 'orders' 
+}));
+```
+
+#### .has(label)
+checks if a label exists.
+
+<table>
+  <tr><th align="center" colspan="2">params</th></tr>
+  <tr><td><b>name</b></td><td><b>type</b></td></tr>
+  <tr>
+    <td>label</td>
+    <td>string</td>
+  </tr>
+</table>
+
+#### Example
+
+```js
+console.log(dataLoaders.has('orders')); // true
+```
+
+<h4><a id="getlabel-2"></a>.get(label)</h4>
+
+gets an interval by its label.
+
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>Interval</td>
+ </tr>
+</table>
+
+##### Example
+
+```js
+const ordersInterval = dataLoaders.get('orders');
+
+console.log(ordersInterval.getLabel()); // orders
+console.log(ordersInterval.isRunning()); // false
+```
+
+<h4><a id="getlabel-3"></a>.getLabel()</h4>
+
+gets the composite label.
+
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>string</td>
+ </tr>
+</table>
+
+##### Example
+```js
+console.log(dataLoaders.getLabel()); // data-loaders
+```
+
+#### .forEach(cb)
+traverses the intervals.
+
+<table>
+  <tr><th align="center" colspan="2">params</th></tr>
+  <tr><td><b>name</b></td><td><b>type</b></td></tr>
+  <tr>
+    <td>cb</td>
+    <td>function</td>
+  </tr>
+</table>
+
+##### Example
+
+```js
+dataLoaders.forEach((interval) => {
+  console.log(interval.getLabel());
+});
+
+/*
+users
+products
+orders
+*/
+```
+
+#### .filter(cb, label)
+filters the intervals using a callback. It also accept an optional label to name the filtered composite.
+
+<table>
+  <tr><th align="center" colspan="2">params</th></tr>
+  <tr><td><b>name</b></td><td><b>type</b></td></tr>
+  <tr>
+    <td>cb</td>
+    <td>function</td>
+  </tr>
+  <tr>
+    <td>label</td>
+    <td>string</td>
+  </tr>
+</table>
+
+##### Example
+
+```js
+const slowLoaders = dataLoaders.filter((i) => i.getMs() > 20000, 'slow-intervals');
+
+console.log(slowLoaders.getLabel()); // slow-intervals
+
+slowLoaders.forEach((interval) => console.log(interval.getLabel()));
+/*
+users
+products
+*/
+```
+
+#### .toArray()
+converts the composite into an array of intervals.
+
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>array</td>
+ </tr>
+</table>
+
+##### Example
+
+```js
+console.log(dataLoaders.toArray());
+```
+
+#### .count()
+gets the count of intervals.
+
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>number</td>
+ </tr>
+</table>
+
+##### Example
+
+```js
+console.log(dataLoaders.count()); // 3
+```
+
+<h4><a id="start-2"></a>.start()</h4>
+
+starts the intervals
+
+##### Example
+
+```js
+console.log(dataLoaders.start()); // 3
+```
+
+<h4><a id="isrunning-2"></a>.isRunning()</h4>
+
+checks if the intervals are started.
+
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>boolean</td>
+ </tr>
+</table>
+
+##### Example
+
+```js
+console.log(dataLoaders.isRunning()); // true
+```
+
+<h4><a id="clear-2"></a>.clear()</h4>
+
+clears the intervals.
+
+##### Example
+
+```js
+dataLoaders.clear();
+console.log(dataLoaders.isRunning()); // false
 ```
 
 ## Build
@@ -154,5 +412,5 @@ grunt build
 ```
 
 ## License
-The MIT License. Full License is [here](https://github.com/js-shelf/intervals-composite/blob/master/LICENSE)
+The MIT License. Full License is [here](https://github.com/node-work/intervals-composite/blob/master/LICENSE)
 
