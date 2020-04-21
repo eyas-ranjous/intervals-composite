@@ -10,26 +10,26 @@ Encapsulate javascript `.setInterval` & `.clearInterval` into an Interval class.
   * [require](#require)
   * [import](#import)
   * [Interval](#interval)
-    * [Construction](#construction)
+    * <a href="#construction-1">Construction</a>
     * <a href="#getlabel-1">.getLabel()</a>
     * [.getMs()](#getms)
     * [.getCb()](#getcb)
-    * [.start()](#start)
-    * [.isRunning](#isrunning)
-    * [.clear()](#clear)
+    * <a href="#start-1">.start()</a>
+    * <a href="#isrunning-1">.isRunning()</a>
+    * <a href="#clear-1">.isRunning()</a>
   * [IntervalComposite](#intervalcomposite)
-    * [Construction](#construction)
+    * <a href="#construction-2">Construction</a>
     * [.add(interval)](#addinterval)
     * [.has(label)](#haslabel)
-    * [.get(label)](#getlabel-)
-    * [.getLabel()](#getlabel)
+    * <a href="#getlabel-2">.getLabel()</a>
+    * <a href="#getlabel-3">.getLabel()</a>
     * [.forEach(cb)](#foreachcb)
     * [.filter(cb, label)](#filtercb-label)
     * [.toArray()](#toarray)
     * [.count()](#count)
-    * [.start()](#start)
-    * [.isRunning()](#isrunning)
-    * [.clear()](#clear)
+    * <a href="#start-2">.start()</a>
+    * <a href="#isrunning-2">.isRunning()</a>
+    * <a href="#clear-2">.isRunning()</a>
  * [Build](#build)
  * [License](#license)
 
@@ -72,6 +72,7 @@ represents a single interval.
 </table>
 
 ##### Example
+
 ```js
 const interval = new Interval({
   cb: () => console.log('test'),
@@ -104,6 +105,7 @@ gets the interval label.
 </table>
 
 ##### Example
+
 ```js
 console.log(interval.getLabel()); // 'test-interval'
 ```
@@ -119,6 +121,7 @@ gets the interval ms.
 </table>
 
 ##### Example
+
 ```js
 console.log(interval.getMs()); // 3000
 ```
@@ -134,6 +137,7 @@ gets the interval callback.
 </table>
 
 ##### Example
+
 ```js
 console.log(interval.getCb()); // [Function: someFunction]
 ```
@@ -142,6 +146,7 @@ console.log(interval.getCb()); // [Function: someFunction]
 starts the interval.
 
 ##### Example
+
 ```js
 interval.start();
 ```
@@ -150,6 +155,7 @@ interval.start();
 checks if the interval is running.
 
 ##### Example
+
 ```js
 console.log(interval.isRunning()); // true
 ```
@@ -158,6 +164,7 @@ console.log(interval.isRunning()); // true
 clears the interval
 
 ##### Example
+
 ```js
 interval.clear();
 ```
