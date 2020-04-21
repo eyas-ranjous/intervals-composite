@@ -11,12 +11,12 @@ Encapsulate javascript `.setInterval` & `.clearInterval` into an Interval class.
   * [import](#import)
   * [Interval](#interval)
     * [Construction](#construction)
-    * [.getLabel()](#getlabel)
+    * [.getLabel()](#getlabel--)
     * [.getMs()](#getms)
     * [.getCb()](#getcb)
-    * [.start()](#start)
-    * [.isRunning](#isrunning)
-    * [.clear()](#clear)
+    * [.start()](#start-)
+    * [.isRunning](#isrunning-)
+    * [.clear()](#clear-)
   * [IntervalComposite](#intervalcomposite)
     * [Construction](#construction)
     * [.add(interval)](#addinterval)
@@ -57,6 +57,21 @@ represents a single interval.
 
 #### Construction
 
+<table>
+  <tr><th align="center" colspan="3">constructor(params)</th></tr>
+  <tr><td><b>name</b></td><td align="center"><b>type</b></td><td align="center"><b>props</b></td></tr>
+  <tr>
+    <td>params</td>
+    <td>object</td>
+    <td>
+      cb <i>function</i><br><br>
+      ms <i>number</i><br><br>
+      label <i>string</i><br><br>
+    </td>
+  </tr>
+</table>
+
+##### Example
 ```js
 const interval = new Interval({
   cb: () => console.log('test'),
@@ -77,9 +92,17 @@ const interval = new Interval({
 });
 ```
 
-#### .getLabel()
+#### .getLabel()  
 gets the interval label.
 
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>string</td>
+ </tr>
+</table>
+
+##### Example
 ```js
 console.log(interval.getLabel()); // 'test-interval'
 ```
@@ -87,6 +110,14 @@ console.log(interval.getLabel()); // 'test-interval'
 #### .getMs()
 gets the interval ms.
 
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>number</td>
+ </tr>
+</table>
+
+##### Example
 ```js
 console.log(interval.getMs()); // 3000
 ```
@@ -94,27 +125,38 @@ console.log(interval.getMs()); // 3000
 #### .getCb()
 gets the interval callback.
 
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>function</td>
+ </tr>
+</table>
+
+##### Example
 ```js
 console.log(interval.getCb()); // [Function: someFunction]
 ```
 
-#### .start()
+#### .start() 
 starts the interval.
 
+##### Example
 ```js
 interval.start();
 ```
 
-#### .isRunning()
+#### .isRunning() 
 checks if the interval is running.
 
+##### Example
 ```js
 console.log(interval.isRunning()); // true
 ```
 
-#### .clear()
+#### .clear() 
 clears the interval
 
+##### Example
 ```js
 interval.clear();
 ```
