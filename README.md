@@ -142,7 +142,8 @@ gets the interval callback.
 console.log(interval.getCb()); // [Function: someFunction]
 ```
 
-#### .start() 
+<h4><a id="start-1"></a>.start()</h4>
+
 starts the interval.
 
 ##### Example
@@ -151,7 +152,8 @@ starts the interval.
 interval.start();
 ```
 
-#### .isRunning() 
+<h4><a id="isrunning-1"></a>.isRunning()</h4>
+
 checks if the interval is running.
 
 ##### Example
@@ -160,7 +162,8 @@ checks if the interval is running.
 console.log(interval.isRunning()); // true
 ```
 
-#### .clear() 
+<h4><a id="clear-1"></a>.clear()</h4>
+
 clears the interval
 
 ##### Example
