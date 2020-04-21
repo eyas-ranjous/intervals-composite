@@ -1,7 +1,7 @@
 {
   "name": "intervals-composite",
-  "version": "0.3.0",
-  "description": "simplifies working with multiple intervals in a node app.",
+  "version": "1.0.0",
+  "description": "simplifies working with individual and composite intervals in an application.",
   "main": "index.js",
   "scripts": {
     "test": "grunt test"
