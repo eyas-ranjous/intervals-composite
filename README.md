@@ -11,12 +11,12 @@ Encapsulate javascript `.setInterval` & `.clearInterval` into an Interval class.
   * [import](#import)
   * [Interval](#interval)
     * [Construction](#construction)
-    * [.getLabel()](#getlabel--)
+    * <a href="#getlabel-1">.getLabel()</a>
     * [.getMs()](#getms)
     * [.getCb()](#getcb)
-    * [.start()](#start-)
-    * [.isRunning](#isrunning-)
-    * [.clear()](#clear-)
+    * [.start()](#start)
+    * [.isRunning](#isrunning)
+    * [.clear()](#clear)
   * [IntervalComposite](#intervalcomposite)
     * [Construction](#construction)
     * [.add(interval)](#addinterval)
@@ -92,7 +92,7 @@ const interval = new Interval({
 });
 ```
 
-#### .getLabel()  
+<h4><a id="getLabel-1"></a>.getLabel()</h4>
 gets the interval label.
 
 <table>
