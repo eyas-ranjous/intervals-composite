@@ -96,7 +96,6 @@ const interval = new Interval({
 
 gets the interval label.
 
-
 <table>
  <tr><th>return</th></tr>
  <tr>
