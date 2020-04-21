@@ -16,7 +16,7 @@ Encapsulate javascript `.setInterval` & `.clearInterval` into an Interval class.
     * [.getCb()](#getcb)
     * <a href="#start-1">.start()</a>
     * <a href="#isrunning-1">.isRunning()</a>
-    * <a href="#clear-1">.isRunning()</a>
+    * <a href="#clear-1">.clear()</a>
   * [IntervalComposite](#intervalcomposite)
     * <a href="#construction-2">Construction</a>
     * [.add(interval)](#addinterval)
@@ -55,7 +55,7 @@ import { Interval, IntervalComposite } from 'intervals-composite';
 ### Interval
 represents a single interval.
 
-#### Construction
+<h4><a id="construction-1"></a>Construction</h4>
 
 <table>
   <tr><th align="center" colspan="3">constructor(params)</th></tr>
@@ -174,7 +174,18 @@ interval.clear();
 
 ### IntervalComposite
 
-#### Construction
+<h4><a id="construction-2"></a>Construction</h4>
+
+<table>
+  <tr><th align="center" colspan="2">constructor(label)</th></tr>
+  <tr><td><b>name</b></td><td><b>type</b></td></tr>
+  <tr>
+    <td>label</td>
+    <td>string</td>
+  </tr>
+</table>
+
+#### Example
 
 ```js
 const dataLoaders = new IntervalComposite('data-loaders');
@@ -182,6 +193,17 @@ const dataLoaders = new IntervalComposite('data-loaders');
 
 #### .add(interval)
 adds an interval.
+
+<table>
+  <tr><th align="center" colspan="2">params</th></tr>
+  <tr><td><b>name</b></td><td><b>type</b></td></tr>
+  <tr>
+    <td>interval</td>
+    <td>Interval</td>
+  </tr>
+</table>
+
+#### Example
 
 ```js
 dataLoaders.add(new Interval({
@@ -206,12 +228,32 @@ dataLoaders.add(new Interval({
 #### .has(label)
 checks if a label exists.
 
+<table>
+  <tr><th align="center" colspan="2">params</th></tr>
+  <tr><td><b>name</b></td><td><b>type</b></td></tr>
+  <tr>
+    <td>label</td>
+    <td>string</td>
+  </tr>
+</table>
+
+#### Example
+
 ```js
 console.log(intervalcomposite.has('orders')); // true
 ```
 
 #### .get(label)
 gets an interval by its label.
+
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>Interval</td>
+ </tr>
+</table>
+
+##### Example
 
 ```js
 const ordersInterval = intervalcomposite.get('orders');
@@ -223,12 +265,31 @@ console.log(ordersInterval.isRunning()); // false
 #### .getLabel()
 gets the composite label.
 
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>string</td>
+ </tr>
+</table>
+
+##### Example
 ```js
 console.log(dataLoaders.getLabel()); // data-loaders
 ```
 
-#### .forEach()
+#### .forEach(cb)
 traverses the intervals.
+
+<table>
+  <tr><th align="center" colspan="2">params</th></tr>
+  <tr><td><b>name</b></td><td><b>type</b></td></tr>
+  <tr>
+    <td>cb</td>
+    <td>function</td>
+  </tr>
+</table>
+
+##### Example
 
 ```js
 IntervalComposite.forEach((interval) => {
@@ -242,15 +303,30 @@ orders
 */
 ```
 
-#### .filter()
-filters the intervals using a callback.
+#### .filter(cb, label)
+filters the intervals using a callback. It also accept an optional label to name the filtered composite.
+
+<table>
+  <tr><th align="center" colspan="2">params</th></tr>
+  <tr><td><b>name</b></td><td><b>type</b></td></tr>
+  <tr>
+    <td>cb</td>
+    <td>function</td>
+  </tr>
+  <tr>
+    <td>label</td>
+    <td>string</td>
+  </tr>
+</table>
+
+##### Example
 
 ```js
-const filtered = IntervalComposite.filter((i) => i.getMs() > 20000);
+const slowIntervals = IntervalComposite.filter((i) => i.getMs() > 20000, 'slow-intervals');
 
-filtered.forEach((interval) => {
-  console.log(interval.getLabel());
-});
+console.log(slowIntervals.getLabel()); // slow-intervals
+
+slowIntervals.forEach((interval) => console.log(interval.getLabel()));
 /*
 users
 products
@@ -260,12 +336,30 @@ products
 #### .toArray()
 converts the composite into an array of intervals.
 
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>array</td>
+ </tr>
+</table>
+
+##### Example
+
 ```js
 console.log(intervalcomposite.toArray());
 ```
 
 #### .count()
 gets the count of intervals.
+
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>number</td>
+ </tr>
+</table>
+
+##### Example
 
 ```js
 console.log(intervalcomposite.count()); // 3
@@ -274,6 +368,8 @@ console.log(intervalcomposite.count()); // 3
 #### .start()
 starts the intervals
 
+##### Example
+
 ```js
 console.log(intervalcomposite.start()); // 3
 ```
@@ -281,12 +377,24 @@ console.log(intervalcomposite.start()); // 3
 #### .isRunning()
 checks if the intervals are started.
 
+<table>
+ <tr><th>return</th></tr>
+ <tr>
+  <td>boolean</td>
+ </tr>
+</table>
+
+##### Example
+
 ```js
 console.log(intervalcomposite.isRunning()); // true
 ```
 
 #### .clear()
 clears the intervals.
+
+##### Example
+
 ```js
 intervalcomposite.clear();
 console.log(intervalcomposite.isRunning()); // false
