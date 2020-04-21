@@ -82,7 +82,7 @@ const interval = new Interval({
 // OR, if you have the callback in another object 
 
 const handler = {
-  someFunction: () => console.log()
+  someFunction: () => console.log('test')
 };
 
 const interval = new Interval({
@@ -159,6 +159,15 @@ checks if the interval is running.
 
 ```js
 console.log(interval.isRunning()); // true
+
+/*
+test
+test
+test
+.
+.
+.
+*/
 ```
 
 <h4><a id="clear-1"></a>.clear()</h4>
@@ -208,20 +217,20 @@ adds an interval.
 
 ```js
 dataLoaders.add(new Interval({
-  cb: () => { /* some code */ },
-  ms: 70000,
+  cb: () => console.log('users'),
+  ms: 7000,
   label: 'users' 
 }));
 
 dataLoaders.add(new Interval({
-  cb: () => { /* some code */ },
-  ms: 30000,
+  cb: () => console.log('products'),
+  ms: 3000,
   label: 'products' 
 }));
 
 dataLoaders.add(new Interval({
-  cb: () => { /* some code */ },
-  ms: 10000,
+  cb: () => console.log('orders'),
+  ms: 1000,
   label: 'orders' 
 }));
 ```
@@ -325,7 +334,7 @@ filters the intervals using a callback. It also accept an optional label to name
 ##### Example
 
 ```js
-const slowLoaders = dataLoaders.filter((i) => i.getMs() > 20000, 'slow-intervals');
+const slowLoaders = dataLoaders.filter((i) => i.getMs() > 1000, 'slow-intervals');
 
 console.log(slowLoaders.getLabel()); // slow-intervals
 
@@ -340,16 +349,21 @@ products
 converts the composite into an array of intervals.
 
 <table>
- <tr><th>return</th></tr>
+ <tr><th>return</th><th>item type</th></tr>
  <tr>
   <td>array</td>
+  <td>Interval</td>
  </tr>
 </table>
 
 ##### Example
 
 ```js
-console.log(dataLoaders.toArray());
+console.log(dataLoaders.toArray().map(i => i.getLabel()));
+
+/*
+[ 'users', 'products', 'orders' ]
+*/
 ```
 
 #### .count()
@@ -375,7 +389,20 @@ starts the intervals
 ##### Example
 
 ```js
-console.log(dataLoaders.start()); // 3
+dataLoaders.start();
+
+/*
+ders
+products
+orders
+orders
+orders
+products
+orders
+users
+orders
+orders
+*/
 ```
 
 <h4><a id="isrunning-2"></a>.isRunning()</h4>
